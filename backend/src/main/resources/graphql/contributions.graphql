@@ -1,0 +1,31 @@
+query Contributions($login: String!, $from: DateTime!, $to: DateTime!) {
+  user(login: $login) {
+    login
+    name
+    contributionsCollection(from: $from, to: $to) {
+      totalCommitContributions
+      totalPullRequestContributions
+      totalIssueContributions
+      contributionCalendar {
+        weeks {
+          contributionDays {
+            date
+            contributionCount
+          }
+        }
+      }
+      commitContributionsByRepository(maxRepositories: 10) {
+        repository {
+          nameWithOwner
+          primaryLanguage {
+            name
+            color
+          }
+        }
+        contributions {
+          totalCount
+        }
+      }
+    }
+  }
+}
